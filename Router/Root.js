@@ -3,8 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Jobs from '../Pages/Jobs';
 import Details from '../Pages/Details/Details';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Favorite from '../Pages/Favorite/Favorite';
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const Root = () => {
     return (
@@ -24,9 +27,17 @@ const Root = () => {
                         fontWeight: '700'
                     }
                 }} />
+                <Stack.Screen name='Drawers' component={DrawerRoot} />
             </Stack.Navigator>
         </NavigationContainer>
     )
 }
 
+const DrawerRoot = () => {
+    return (
+        <Drawer.Navigator>
+            <Drawer.Screen name='Favorite' component={Favorite} />
+        </Drawer.Navigator>
+    )
+}
 export default Root

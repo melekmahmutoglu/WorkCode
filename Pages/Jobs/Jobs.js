@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 import styles from './Jobs.style'
 import useFetch from '../../Hooks/useFetch';
 import JobComponent from '../../Component/JobComponent/JobComponent';
+import AnimationLoading from '../../Component/Animations/AnimationLoading';
+import AnimationError from '../../Component/Animations/AnimationError';
+
+
 
 const Jobs = ({ navigation }) => {
     const getApi = process.env.EXPO_PUBLIC_API_URL;
@@ -10,10 +14,10 @@ const Jobs = ({ navigation }) => {
     const { data, loading, error } = useFetch(`${getApi}?page=${page}`)
 
     if (loading) {
-        return <Text>Loading...</Text>
+        return <AnimationLoading />
     }
     if (error) {
-        return <Text>Error..</Text>
+        return <AnimationError />
     }
 
     const pressDetails = item => navigation.navigate('Details', { item })

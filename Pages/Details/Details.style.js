@@ -50,5 +50,10 @@ export default StyleSheet.create({
         margin: 5,
         backgroundColor: 'white',
         color: '#363434',
+    },
+    buttonDetailsContainer: {
+        flexDirection: 'row',
+
     }
+
 })

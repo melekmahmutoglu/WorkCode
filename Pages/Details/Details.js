@@ -2,6 +2,7 @@ import { View, Text, ScrollView, Dimensions } from 'react-native'
 import React from 'react'
 import styles from './Details.style'
 import RenderHTML from 'react-native-render-html'
+import Button from '../../Component/Buttons/Button'
 
 
 const Details = ({ route, navigation }) => {
@@ -27,8 +28,9 @@ const Details = ({ route, navigation }) => {
                     baseStyle={styles.baseStyle}
                 />
             </View>
-            <View>
-
+            <View style={styles.buttonDetailsContainer}>
+                <Button title={'Log Out'} icon={'logOut'} />
+                <Button title={'Favorites'} icon={'favorite'} />
             </View>
         </ScrollView>
     )
