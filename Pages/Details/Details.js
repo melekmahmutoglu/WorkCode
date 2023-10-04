@@ -5,6 +5,7 @@ import RenderHTML from 'react-native-render-html'
 import Button from '../../Component/Buttons/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import { addFavorite } from '../../Redux/FavoriteSlice/FavoriteSlice'
+import { addSubmit } from '../../Redux/SubmitSlice/SubmitSlice'
 
 
 
@@ -12,6 +13,7 @@ import { addFavorite } from '../../Redux/FavoriteSlice/FavoriteSlice'
 const Details = ({ route, navigation }) => {
     const job = route.params.item
     const favoriteList = useSelector((state) => state.favorite.favoriteList)
+    const submitList = useSelector((state) => state.submit.submitList)
     const dispatch = useDispatch()
 
 
@@ -25,6 +27,18 @@ const Details = ({ route, navigation }) => {
 
         dispatch(addFavorite(favoriteID))
         navigation.navigate('Favorite')
+    }
+
+    const handleSubmit = (submitID) => {
+        if (submitList.find(item => item.id === submitID.id)) {
+            return Alert.alert('This job is already submited...');
+        } else if (submitList.lenght === 0) {
+            dispatch(addSubmit(submitID))
+            navigation.navigate('Submit')
+        }
+
+        dispatch(addSubmit(submitID))
+        navigation.navigate('Submit')
     }
 
     return (
@@ -49,7 +63,7 @@ const Details = ({ route, navigation }) => {
                 />
             </View>
             <View style={styles.buttonDetailsContainer}>
-                <Button title={'Log Out'} icon={'logOut'} onPress={() => navigation.navigate('Jobs')} />
+                <Button title={'Submit'} icon={'logOut'} onPress={() => handleSubmit(job)} />
                 <Button title={'Favorites'} icon={'favorite'} onPress={() => handleFavorite(job)} />
             </View>
         </ScrollView>

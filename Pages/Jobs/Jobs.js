@@ -24,7 +24,7 @@ const Jobs = ({ navigation }) => {
 
     const pressDetails = (item) => {
         setPage(item.id);
-        navigation.navigate('Details', { item, page: item.id })
+        navigation.navigate('Details', { item, page: item.id, })
     }
 
     const renderJobs = ({ item }) => <JobComponent job={item} onPress={() => pressDetails(item)} />
