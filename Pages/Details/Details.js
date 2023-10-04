@@ -1,12 +1,32 @@
-import { View, Text, ScrollView, Dimensions } from 'react-native'
+import { View, Text, ScrollView, Dimensions, Alert } from 'react-native'
 import React from 'react'
 import styles from './Details.style'
 import RenderHTML from 'react-native-render-html'
 import Button from '../../Component/Buttons/Button'
+import { useSelector, useDispatch } from 'react-redux'
+import { addFavorite } from '../../Redux/FavoriteSlice/FavoriteSlice'
+
+
 
 
 const Details = ({ route, navigation }) => {
     const job = route.params.item
+    const favoriteList = useSelector((state) => state.favorite.favoriteList)
+    const dispatch = useDispatch()
+
+
+    const handleFavorite = (favoriteID) => {
+        if (favoriteList.find(item => item.id === favoriteID.id)) {
+            return Alert.alert('This job is already added...');
+        } else if (favoriteList.lenght === 0) {
+            dispatch(addFavorite(favoriteID))
+            navigation.navigate('Favourite')
+        }
+
+        dispatch(addFavorite(favoriteID))
+        navigation.navigate('Favorite')
+    }
+
     return (
         <ScrollView>
             <View style={styles.mainContainer}>
@@ -29,8 +49,8 @@ const Details = ({ route, navigation }) => {
                 />
             </View>
             <View style={styles.buttonDetailsContainer}>
-                <Button title={'Log Out'} icon={'logOut'} />
-                <Button title={'Favorites'} icon={'favorite'} />
+                <Button title={'Log Out'} icon={'logOut'} onPress={() => navigation.navigate('Jobs')} />
+                <Button title={'Favorites'} icon={'favorite'} onPress={() => handleFavorite(job)} />
             </View>
         </ScrollView>
     )

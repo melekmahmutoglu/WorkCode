@@ -3,8 +3,11 @@ import React from 'react'
 import styles from './Button.style'
 import Favorite from '../../assets/svg/Favorite'
 import LogOut from '../../assets/svg/LogOut'
+import { useDispatch } from 'react-redux'
+import { removeFavorite } from '../../Redux/FavoriteSlice/FavoriteSlice'
 
-const Button = ({ title, icon }) => {
+const Button = ({ title, icon, onPress }) => {
+
     return (
         <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
             <View style={styles.iconContainer}>

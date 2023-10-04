@@ -20,16 +20,23 @@ const Jobs = ({ navigation }) => {
         return <AnimationError />
     }
 
-    const pressDetails = item => navigation.navigate('Details', { item })
+
+
+    const pressDetails = (item) => {
+        setPage(item.id);
+        navigation.navigate('Details', { item, page: item.id })
+    }
 
     const renderJobs = ({ item }) => <JobComponent job={item} onPress={() => pressDetails(item)} />
+
+    const keyID = (item) => item.id
 
     return (
         <View>
             <FlatList
                 data={data.results}
                 renderItem={renderJobs}
-                keyExtractor={(item) => item.id}
+                keyExtractor={keyID}
             />
         </View>
     )

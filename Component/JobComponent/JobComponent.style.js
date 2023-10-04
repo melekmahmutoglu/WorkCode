@@ -33,4 +33,10 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'right',
     },
+    removeContainer: {
+        backgroundColor: '#FF6666',
+        padding: 5,
+        margin: 10,
+        borderRadius: 15,
+    }
 })
